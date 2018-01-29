@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>message board</title>
+    <style>
+        ul,li{
+            list-style: none;
+        }
+        input{
+            width: 200px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <input type="text" placeholder="请输入您的留言，按回车键结束" v-model="msg" @keyup.enter="add">
+        <ul>
+            <!--<li v-for="(mg,index) in arr">{{index+1}}.{{mg}}</li>-->
+            <!--这里有个坑，直接写{{}}的话，页面渲染时会出现花括号，影响用户体验，因此改用v-text代替-->
+            <li v-for="(mg,index) in arr" v-text="index+1+'.'+mg"></li>
+        </ul>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    let vm=new Vue({
+        el:'#app',
+        data:{
+            msg:"",
+            arr:[]
+        },
+        methods:{
+            add(){
+                this.arr.push(this.msg);
+                this.msg="";
+            }
+        }
+    })
+</script>
+</body>
+</html>
